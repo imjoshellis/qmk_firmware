@@ -14,13 +14,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-#include <print.h>
 
-bool     is_cmd_tab_active = false;
-uint16_t cmd_tab_timer     = 0;
+bool     is_cmd_tab_active  = false;
+uint16_t cmd_tab_timer      = 0;
+bool     is_ctl_tab_active = false;
+uint16_t ctl_tab_timer     = 0;
+bool     is_cmd_grv_active  = false;
+uint16_t cmd_grv_timer      = 0;
 
 // Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes { ARW = SAFE_RANGE, ARW_FN, OPN_LSN, CMD_TAB };
+enum custom_keycodes { ARW = SAFE_RANGE, ARW_FN, OPN_LSN, CMD_TAB, CTL_TAB, CMD_GRV };
 
 // Define macros
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -64,6 +67,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_TAB);
             }
             break;
+        case CTL_TAB:
+            if (record->event.pressed) {
+                if (!is_ctl_tab_active) {
+                    is_ctl_tab_active = true;
+                    register_code(KC_LGUI);
+                }
+                ctl_tab_timer = timer_read();
+                register_code(KC_TAB);
+            } else {
+                unregister_code(KC_TAB);
+            }
+            break;
+        case CMD_GRV:
+            if (record->event.pressed) {
+                if (!is_cmd_grv_active) {
+                    is_cmd_grv_active = true;
+                    register_code(KC_LGUI);
+                }
+                cmd_grv_timer = timer_read();
+                register_code(KC_TAB);
+            } else {
+                unregister_code(KC_TAB);
+            }
+            break;
     }
     return true;
 };
@@ -101,10 +128,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // Space Navigation
 #define N_ND    C(KC_RGHT)     // Next Desktop
 #define N_PD    C(KC_LEFT)     // Prev Desktop
-#define N_NW    G(KC_GRV)      // Next Window
-#define N_PW    G(S(KC_GRV))   // Prev Window
-#define N_NT    C(KC_TAB)      // Next Tab
-#define N_PT    C(S(KC_TAB))   // Prev Tab
 
 // Zoom Controls
 #define Z_IN    G(KC_EQL)      // Zoom In
@@ -140,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, N_PW,    N_NT,    N_PT,    N_NW,    N_PD,    _______, 
+        KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, _______, CTL_TAB, CMD_GRV, _______, N_PD,    _______, 
         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_ND,    _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, VS_TERM, VS_WIN1, VS_WIN2, VS_WIN3, VS_WIN4, _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -178,6 +201,18 @@ void matrix_scan_user(void) {
         if (timer_elapsed(cmd_tab_timer) > 400) {
             unregister_code(KC_LGUI);
             is_cmd_tab_active = false;
+        }
+    }
+    if (is_ctl_tab_active) {
+        if (timer_elapsed(ctl_tab_timer) > 400) {
+            unregister_code(KC_LGUI);
+            is_ctl_tab_active = false;
+        }
+    }
+    if (is_cmd_grv_active) {
+        if (timer_elapsed(cmd_grv_timer) > 400) {
+            unregister_code(KC_LGUI);
+            is_cmd_grv_active = false;
         }
     }
 }
