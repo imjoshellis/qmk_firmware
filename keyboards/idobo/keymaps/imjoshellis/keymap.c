@@ -40,10 +40,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OPN_LSN:
             if (record->event.pressed) {
                 SEND_STRING("v$y");
+                _delay_ms(200);
                 register_code(KC_LGUI);
                 register_code(KC_SPC);
                 unregister_code(KC_SPC);
                 unregister_code(KC_LGUI);
+                _delay_ms(200);
                 SEND_STRING("rt");
                 register_code(KC_ENT);
                 unregister_code(KC_ENT);
@@ -113,6 +115,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define VS_TERM G(S(KC_J))     // Show/Hide Terminal
 #define VS_WIN1 G(KC_1)        // Focus First Panel
 #define VS_WIN2 G(KC_2)        // Focus Second Panel
+#define VS_WIN3 G(KC_3)        // Focus Third Panel
+#define VS_WIN4 G(KC_4)        // Focus Fourth Panel
 #define VS_EXP  G(S(KC_E))     // Focus Explorer
 #define VS_GIT  C(S(KC_G))     // Focus Source Control
 
@@ -138,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, N_PW,    N_NT,    N_PT,    N_NW,    N_PD,    _______, 
         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_ND,    _______, 
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, VS_TERM, VS_WIN1, VS_WIN2, VS_EXP,  VS_GIT,  _______, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, VS_TERM, VS_WIN1, VS_WIN2, VS_WIN3, VS_WIN4, _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
         ),
     [2] = LAYOUT_ortho_5x15(
