@@ -106,6 +106,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define LCA_ESC LCA_T(KC_ESC)    // ESC  || LCA 
 #define SFT_TAB LSFT_T(KC_TAB)   // TAB  || SFT 
 #define SG_BSPC SGUI_T(KC_BSPC)   // SGUI || ENT 
+#define SFT_ENT RSFT_T(KC_ENT)
 
 // Window Controls
 #define FLLSCRN C(G(KC_F))     // FULLSCREEN
@@ -157,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    Z_OUT,   Z_RESET, Z_IN,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, 
         KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    FLLSCRN, OSL(3),  DIS_NCH, KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSLS, 
         LC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_MUTE, KC_VOLD, KC_VOLU, KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, 
-        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MPRV, KC_MPLY, KC_MNXT, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT, 
+        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_MPRV, KC_MPLY, KC_MNXT, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, SFT_ENT, 
         MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, MO(2),   SFT_TAB, TG(5),   SG_BSPC, KC_SPC,  MO(1),   CMD_TAB, N_PD,    N_ND,    MO(12)
         ),
     [1] = LAYOUT_ortho_5x15(
