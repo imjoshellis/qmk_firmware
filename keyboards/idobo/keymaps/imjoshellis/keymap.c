@@ -179,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
     [3] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, W_LTRD,  W_CTRD,  W_CTRD,  _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______, 
+        _______, _______, _______, _______, _______, _______, W_LTRD,  W_CTRD,  W_RTRD,  _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______, 
         _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, W_L2TRD, W_MAX,   W_R2TRD, _______, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______, 
         _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, W_UL,    W_U,     W_UR,    _______, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, _______, 
         _______, _______, _______, _______, _______, _______, W_L,     W_C,     W_R,     _______, KC_P1,   KC_P2,   KC_P3,   KC_PEQL, _______, 
