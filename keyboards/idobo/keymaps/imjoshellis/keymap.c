@@ -23,7 +23,7 @@ bool     is_cmd_grv_active  = false;
 uint16_t cmd_grv_timer      = 0;
 
 // Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes { ARW = SAFE_RANGE, ARW_FN, OPN_LSN, CMD_TAB, CTL_TAB, CMD_GRV };
+enum custom_keycodes { ARW = SAFE_RANGE, JS_VAR, OPN_LSN, CMD_TAB, CTL_TAB, CMD_GRV };
 
 // Define macros
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -34,9 +34,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
             }
             break;
-        case ARW_FN:
+        case JS_VAR:
             if (record->event.pressed) {
-                SEND_STRING("() => {}");
+                SEND_STRING("${}");
+                register_code(KC_LEFT);
             } else {
             }
             break;
@@ -172,11 +173,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [2] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, _______, _______, _______, KC_HASH, KC_LCBR, KC_RCBR, ARW,     ARW_FN,  OPN_LSN, 
-        KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, _______, _______, _______, KC_CIRC, KC_LBRC, KC_RBRC, KC_MINS, KC_EQL,  KC_GRV, 
-        _______, _______, CUT,     COPY,    PASTE,   _______, _______, _______, _______, KC_DLR,  KC_UNDS, KC_PLUS, _______, _______, _______, 
+        _______, _______, _______, KC_LBRC, KC_LCBR, KC_MINS, _______, _______, _______, KC_EQL,  KC_RCBR, KC_RBRC, ARW,     JS_VAR,  OPN_LSN, 
+        _______, KC_AMPR, KC_PERC, KC_HASH, KC_LPRN, KC_EXLM, _______, _______, _______, KC_ASTR, KC_RPRN, KC_AT,   KC_DLR,  KC_CIRC, KC_GRV, 
+        _______, KC_7,    KC_5,    KC_3,    KC_1,    KC_9,    _______, _______, _______, KC_8,    KC_0,    KC_2,    KC_4,    KC_6,    _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
         ),
+    // [2] = LAYOUT_ortho_5x15(
+    //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+       // _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+       // KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, _______, _______, _______, KC_HASH, KC_LCBR, KC_RCBR, ARW,     ARW_FN,  OPN_LSN, 
+       // KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, _______, _______, _______, KC_CIRC, KC_LBRC, KC_RBRC, KC_MINS, KC_EQL,  KC_GRV, 
+       // _______, _______, CUT,     COPY,    PASTE,   _______, _______, _______, _______, KC_DLR,  KC_UNDS, KC_PLUS, _______, _______, _______, 
+       // _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+       // ),
     [3] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, W_LTRD,  W_CTRD,  W_RTRD,  _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______, 
