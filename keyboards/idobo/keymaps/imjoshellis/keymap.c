@@ -23,7 +23,7 @@ bool     is_cmd_grv_active  = false;
 uint16_t cmd_grv_timer      = 0;
 
 // Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes { ARW = SAFE_RANGE, JS_VAR, OPN_LSN, CMD_TAB, CTL_TAB, CMD_GRV };
+enum custom_keycodes { ARW = SAFE_RANGE, JS_VAR, GB_TIDY, CMD_TAB, CTL_TAB, CMD_GRV };
 
 // Define macros
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -42,16 +42,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
             }
             break;
-        case OPN_LSN:
+        case GB_TIDY: 
             if (record->event.pressed) {
-                SEND_STRING("v$y");
-                _delay_ms(200);
-                register_code(KC_LGUI);
-                register_code(KC_SPC);
-                unregister_code(KC_SPC);
-                unregister_code(KC_LGUI);
-                _delay_ms(200);
-                SEND_STRING("rt");
+                SEND_STRING("gbtidy");
                 register_code(KC_ENT);
                 unregister_code(KC_ENT);
             } else {
@@ -174,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [2] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        _______, _______, _______, KC_LBRC, KC_LCBR, KC_MINS, _______, _______, _______, KC_EQL,  KC_RCBR, KC_RBRC, ARW,     JS_VAR,  OPN_LSN, 
+        _______, _______, _______, KC_LBRC, KC_LCBR, KC_MINS, _______, _______, GB_TIDY, KC_EQL,  KC_RCBR, KC_RBRC, ARW,     JS_VAR,  _______, 
         _______, KC_AMPR, KC_PERC, KC_HASH, KC_LPRN, KC_EXLM, _______, _______, _______, KC_ASTR, KC_RPRN, KC_AT,   KC_DLR,  KC_CIRC, KC_GRV, 
         _______, KC_7,    KC_5,    KC_3,    KC_1,    KC_9,    _______, _______, _______, KC_8,    KC_0,    KC_2,    KC_4,    KC_6,    _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
