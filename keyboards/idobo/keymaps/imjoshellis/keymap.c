@@ -23,7 +23,7 @@ bool     is_cmd_grv_active  = false;
 uint16_t cmd_grv_timer      = 0;
 
 // Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes { ARW = SAFE_RANGE, JS_VAR, GB_TIDY, CMD_TAB, CTL_TAB, CMD_GRV };
+enum custom_keycodes { ARW = SAFE_RANGE, GO_EQL, GB_TIDY, CMD_TAB, CTL_TAB, CMD_GRV };
 
 // Define macros
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -34,11 +34,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
             }
             break;
-        case JS_VAR:
+        case GO_EQL:
             if (record->event.pressed) {
-                SEND_STRING("${}");
-                register_code(KC_LEFT);
-                unregister_code(KC_LEFT);
+                SEND_STRING(":=");
             } else {
             }
             break;
@@ -167,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [2] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, KC_BRMD, KC_BRMU, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, 
-        _______, _______, _______, KC_LBRC, KC_LCBR, KC_MINS, _______, _______, GB_TIDY, KC_EQL,  KC_RCBR, KC_RBRC, ARW,     JS_VAR,  _______, 
+        _______, _______, _______, KC_LBRC, KC_LCBR, KC_MINS, _______, _______, GB_TIDY, KC_EQL,  KC_RCBR, KC_RBRC, ARW,     GO_EQL,  _______, 
         _______, KC_AMPR, KC_PERC, KC_HASH, KC_LPRN, KC_EXLM, _______, _______, _______, KC_ASTR, KC_RPRN, KC_AT,   KC_DLR,  KC_CIRC, KC_GRV, 
         _______, KC_7,    KC_5,    KC_3,    KC_1,    KC_9,    _______, _______, _______, KC_8,    KC_0,    KC_2,    KC_4,    KC_6,    _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
