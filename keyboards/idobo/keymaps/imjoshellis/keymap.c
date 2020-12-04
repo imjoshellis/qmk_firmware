@@ -23,7 +23,7 @@ bool     is_cmd_grv_active  = false;
 uint16_t cmd_grv_timer      = 0;
 
 // Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes { ARW = SAFE_RANGE, GO_EQL, GB_TIDY, CMD_TAB, CTL_TAB, CMD_GRV };
+enum custom_keycodes { ARW = SAFE_RANGE, GO_EQL, AT_A, AT_R, AT_S, AT_T, GB_TIDY, CMD_TAB, CTL_TAB, CMD_GRV };
 
 // Define macros
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -37,6 +37,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case GO_EQL:
             if (record->event.pressed) {
                 SEND_STRING(":=");
+            } else {
+            }
+            break;
+        case AT_A:
+            if (record->event.pressed) {
+                SEND_STRING("\\@a");
+            } else {
+            }
+            break;
+        case AT_R:
+            if (record->event.pressed) {
+                SEND_STRING("@r");
+            } else {
+            }
+            break;
+        case AT_S:
+            if (record->event.pressed) {
+                SEND_STRING("@s");
+            } else {
+            }
+            break;
+        case AT_T:
+            if (record->event.pressed) {
+                SEND_STRING("@t");
             } else {
             }
             break;
@@ -157,8 +181,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, _______, CTL_TAB, CMD_GRV, _______, N_PD,    _______, 
-        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_ND,    _______, 
+        KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, _______, CTL_TAB, CMD_GRV, _______, _______, _______, 
+        _______, AT_A,    AT_R,    AT_S,    AT_T,    _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, VS_WIN1, VS_WIN2, VS_WIN3, VS_WIN4, _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
         ),
